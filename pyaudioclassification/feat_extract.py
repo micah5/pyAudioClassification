@@ -43,8 +43,9 @@ def parse_audio_files(parent_dir, sub_dirs, file_ext=None, verbose=True):
                 if verbose: print 'Reading', os.path.join(parent_dir, sub_dir, file_ext), '...'
                 for fn in tqdm(iter):
                     ext_features = get_ext_features(fn)
-                    features = np.vstack([features, ext_features])
-                    labels = np.append(labels, label)
+                    if type(ext_features) is np.ndarray:
+                        features = np.vstack([features, ext_features])
+                        labels = np.append(labels, label)
     return np.array(features), np.array(labels, dtype = np.int)
 
 def get_ext_features(fn):
@@ -53,11 +54,11 @@ def get_ext_features(fn):
     """
     try:
         mfccs, chroma, mel, contrast, tonnetz = extract_feature(fn)
+        ext_features = np.hstack([mfccs, chroma, mel, contrast, tonnetz])
+        return ext_features
     except Exception as e:
         print("[Error] extract feature error. %s" % (e))
-        continue
-    ext_features = np.hstack([mfccs, chroma, mel, contrast, tonnetz])
-    return ext_features
+        return None
 
 def parse_audio_file(fn):
     """Returns features of single audio file

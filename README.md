@@ -93,7 +93,7 @@ model = train(features, labels)
 
 * `print_summary`: Prints a summary of the model you'll be training. Default is `False`.
 
-* `type`: Classification type. Default is `categorical` for >2 classes, and `binary` otherwise.
+* `loss_type`: Classification type. Default is `categorical` for >2 classes, and `binary` otherwise.
 
 You can add any of these as optional arguments, for example `train(features, labels, lr=0.05)`
 
@@ -113,7 +113,7 @@ Now the fun part- try your trained model on new data!
 pred = predict(model, <data_path>)
 ```
 
-Your `<data_path>` can point to a directory of new sound files, or a single file.
+Your `<data_path>` should point to a new, untested audio file.
 
 #### Binary
 If you have 2 classes (or if you force selected `'binary'` as a type), `pred` will just be a single number for each file.
@@ -125,21 +125,26 @@ So for our cat/dog example, if it returns `0.2` it's 80% sure the sound is a cat
 #### Categorical
 If you have more than 2 classes (or if you force selected `'categorical'` as a type), `pred` will be an array for each sound file.
 
+It'll look something like this
+```
+[[1.6454633e-06 3.7017996e-11 9.9999821e-01 1.5900606e-07]]
+```
+
 The index of each array will correspond to the prediction for that class.
 
 ---
 You can pretty print the predictions by showing them in a leaderboard, like so:
 
 ```python
-print_leaderboard(pred)
+print_leaderboard(pred, <training_data_path>)
 ```
 It looks like this:
 
 ```
-1. Siren (index 42)
-2. Cow (index 3)
-3. Chainsaw (index 41)
-4. Cat (index 5)
+1. Cow 100.0% (index 2)
+2. Rooster 0.0% (index 0)
+3. Frog 0.0% (index 3)
+4. Pig 0.0% (index 1)
 ```
 
 ## References
