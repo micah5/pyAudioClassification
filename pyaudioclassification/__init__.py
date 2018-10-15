@@ -23,7 +23,7 @@ def load_features(feat_path='feat.npy', label_path="label.npy"):
         np.load(label_path).ravel()
     return features, labels
 
-def train(features, labels, type='cnn', num_classes=None, print_summary=False, test_split=0, save_model=False):
+def train(features, labels, type='cnn', num_classes=None, print_summary=False, test_split=0, save_model=False, lr=0.005, loss_type=None, epochs):
     from sklearn.model_selection import train_test_split
     if num_classes == None: num_classes = np.max(labels, axis=0)
     if test_split > 0:
@@ -33,8 +33,9 @@ def train(features, labels, type='cnn', num_classes=None, print_summary=False, t
     model = getattr(models, type)(num_classes)
     if print_summary == True: model.summary()
 
-    loss_type = 'binary' if num_classes > 0 else 'categorical'
-    model.compile(optimizer=Adam(lr=0.005),
+    if loss_type == None:
+        loss_type = 'binary' if num_classes > 0 else 'categorical'
+    model.compile(optimizer=Adam(lr=lr),
                   loss='%s_crossentropy' % loss_type,
                   metrics=['accuracy'])
 
@@ -49,7 +50,7 @@ def train(features, labels, type='cnn', num_classes=None, print_summary=False, t
     if test_split > 0:
         X_test = np.expand_dims(X_test, axis=2)
 
-    model.fit(X_train, y_train, batch_size=64, epochs=10)
+    model.fit(X_train, y_train, batch_size=64, epochs=epochs)
     if save_model == True: model.save('my_model.h5')
     if test_split > 0:
         score, acc = model.evaluate(X_test, y_test, batch_size=16)
