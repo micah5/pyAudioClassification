@@ -13,6 +13,14 @@ If you need something a little more involved, check out [pyAudioAnalysis](https:
 pip install pyaudioclassification
 ```
 
+### Requirements
+* Keras
+* Tensorflow
+* librosa
+* NumPy
+* Soundfile
+* tqdm
+
 ## Quick start
 ```python
 from pyaudioclassification import feature_extraction, train, predict
@@ -23,7 +31,7 @@ pred = predict(model, <data_path>)
 
 Or, if you're feeling reckless, you could just string them together like so:
 ```python
-pred = predict(train(feature_extraction(<data_path>)), <data_path>)
+pred = predict(train(feature_extraction(<training_data_path>)), <prediction_data_path>)
 ```
 
 Read below for a more detailed look at each of these calls.
@@ -123,7 +131,17 @@ The index of each array will correspond to the prediction for that class.
 You can pretty print the predictions by showing them in a leaderboard, like so:
 
 ```python
-print_leaderboard(pred, n=10)
+print_leaderboard(pred)
+```
+It looks like this:
+
+```
+1. Siren (index 42)
+2. Cow (index 3)
+3. Chainsaw (index 41)
+4. Cat (index 5)
 ```
 
-(where n corresponds to the number of items on the leaderboard, i.e. top 5, top 10 etc)
+## References
+* Large parts of the code (particularly the feature extraction) are based on [mtobeiyf/audio-classification](https://github.com/mtobeiyf/audio-classification)
+* [panotti](https://github.com/drscotthawley/panotti)

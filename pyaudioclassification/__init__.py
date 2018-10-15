@@ -5,25 +5,25 @@ import models
 from keras.optimizers import Adam
 #from models import svm, nn, cnn
 
-def feature_extraction(data_path, save=False, file_names=('feat', 'label')):
+def feature_extraction(data_path):
+    """Parses audio files in supplied data path.
+    -*- author: mtobeiyf https://github.com/mtobeiyf/audio-classification -*-
+    """
     r = os.listdir(data_path)
     r.sort()
     features, labels = parse_audio_files(data_path, r)
-    if save == True:
-        np.save('%s.npy' % file_names[0], features)
-        np.save('%s.npy' % file_names[1], labels)
     return features, labels
 
-def save_features(features, labels, file_names=('feat', 'label')):
-    np.save('%s.npy' % file_names[0], features)
-    np.save('%s.npy' % file_names[1], labels)
-
-def load_features(feat_path='feat.npy', label_path="label.npy"):
-    features, labels = np.load(feat_path), \
-        np.load(label_path).ravel()
-    return features, labels
-
-def train(features, labels, type='cnn', num_classes=None, print_summary=False, test_split=0, save_model=False, lr=0.01, loss_type=None, epochs=50, optimizer='SGD'):
+def train(features, labels, type='cnn', num_classes=None, print_summary=False,
+    test_split=0, save_model=False, lr=0.01, loss_type=None, epochs=50, optimizer='SGD'):
+    """Trains model based on provided feature & target data
+    Options:
+    - epochs: The number of iterations. Default is 50.
+    - lr: Learning rate. Increase to speed up training time, decrease to get more accurate results (if your loss is 'jumping'). Default is 0.01.
+    - optimiser: Default is 'SGD'.
+    - print_summary: Prints a summary of the model you'll be training. Default is False.
+    - type: Classification type. Default is categorical for >2 classes, and binary otherwise.
+    """
     from sklearn.model_selection import train_test_split
     if num_classes == None: num_classes = np.max(labels, axis=0)
     if test_split > 0:
@@ -59,13 +59,15 @@ def train(features, labels, type='cnn', num_classes=None, print_summary=False, t
 
     return model
 
-def save_model(model, name):
-    model.save('%s.h5' % name)
-
-def load_model(path):
-    return load_model(path)
-
-def predict(data_path, model):
+def predict(model, data_path):
+    """Trains model based on provided feature & target data
+    Options:
+    - epochs: The number of iterations. Default is 50.
+    - lr: Learning rate. Increase to speed up training time, decrease to get more accurate results (if your loss is 'jumping'). Default is 0.01.
+    - optimiser: Default is 'SGD'.
+    - print_summary: Prints a summary of the model you'll be training. Default is False.
+    - type: Classification type. Default is categorical for >2 classes, and binary otherwise.
+    """
     x_data = parse_audio_file(data_path)
     X_train = np.expand_dims(x_data, axis=2)
     pred = model.predict(X_train)
@@ -75,5 +77,5 @@ def print_leaderboard(pred):
     sorted = np.argsort(pred)
     count = 0
     for index in (-pred).argsort()[0]:
-        print count, '.', r[index + 1], '(index %s)' % index
+        print '%d.' % (count + 1), r[index + 1], '(index %s)' % index
         count += 1
