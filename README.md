@@ -61,6 +61,7 @@ features, labels = feature_extraction('/Users/mac2015/data/')
 ```
 
 (If you don't want to print to stdout, just pass `verbose=False` as a argument)
+
 ---
 Depending on how much data you have, this process could take a while... so it might be a good idea to save. You can save and load with [NumPy](https://www.numpy.org/)
 ```python
