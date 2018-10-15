@@ -10,11 +10,10 @@ setup(name='pyaudioclassification',
       classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2.7',
-        'Topic :: Audio Processing :: Audio Classification',
+        'Programming Language :: Python :: 2.7'
       ],
       keywords='simple audio classification',
-      url='http://github.com/storborg/funniest',
+      url='https://github.com/98mprice/pyAudioClassification',
       author='98mprice',
       author_email='98mprice@gmail.com',
       license='MIT',

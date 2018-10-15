@@ -1,3 +1,5 @@
+#!python
+
 from argparse import ArgumentParser
 from pyaudioclassification import feat_extract
 
