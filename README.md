@@ -76,15 +76,15 @@ model = train(features, labels)
 ...but depending on your dataset, you might need to play around with some of the hyper-parameters to get the best results.
 
 #### Options
-⋅⋅* `epochs`: The number of iterations. Default is `50`.
+* `epochs`: The number of iterations. Default is `50`.
 
-⋅⋅* `lr`: Learning rate. Increase to speed up training time, decrease to get more accurate results (if your loss is 'jumping'). Default is `0.01`.
+* `lr`: Learning rate. Increase to speed up training time, decrease to get more accurate results (if your loss is 'jumping'). Default is `0.01`.
 
-⋅⋅* `optimiser`: Choose any of [these](https://keras.io/optimizers/). Default is `'SGD'`.
+* `optimiser`: Choose any of [these](https://keras.io/optimizers/). Default is `'SGD'`.
 
-⋅⋅* `print_summary`: Prints a summary of the model you'll be training. Default is `False`.
+* `print_summary`: Prints a summary of the model you'll be training. Default is `False`.
 
-⋅⋅* `type`: Classification type. Default is `categorical` for >2 classes, and `binary` otherwise.
+* `type`: Classification type. Default is `categorical` for >2 classes, and `binary` otherwise.
 
 You can add any of these as optional arguments, for example `train(features, labels, lr=0.05)`
 
