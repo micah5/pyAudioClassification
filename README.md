@@ -34,6 +34,8 @@ Or, if you're feeling reckless, you could just string them together like so:
 pred = predict(train(feature_extraction(<training_data_path>)), <prediction_data_path>)
 ```
 
+A full example with saving, loading & some dummy data can be found [here](https://github.com/98mprice/pyAudioClassification/blob/master/example/test.py)
+
 Read below for a more detailed look at each of these calls.
 
 ## Detailed Guide
@@ -130,7 +132,7 @@ It'll look something like this
 [[1.6454633e-06 3.7017996e-11 9.9999821e-01 1.5900606e-07]]
 ```
 
-The index of each array will correspond to the prediction for that class.
+The index of each item in the array will correspond to the prediction for that class.
 
 ---
 You can pretty print the predictions by showing them in a leaderboard, like so:
