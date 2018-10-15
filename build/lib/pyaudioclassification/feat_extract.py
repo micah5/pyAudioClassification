@@ -43,9 +43,9 @@ def parse_audio_files(parent_dir, sub_dirs, file_ext=None, verbose=True):
                 if verbose: print 'Reading', os.path.join(parent_dir, sub_dir, file_ext), '...'
                 for fn in tqdm(iter):
                     ext_features = get_ext_features(fn)
-                    if ext_features == None: continue
-                    features = np.vstack([features, ext_features])
-                    labels = np.append(labels, label)
+                    if type(ext_features) is np.ndarray:
+                        features = np.vstack([features, ext_features])
+                        labels = np.append(labels, label)
     return np.array(features), np.array(labels, dtype = np.int)
 
 def get_ext_features(fn):

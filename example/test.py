@@ -21,5 +21,4 @@ else:
 
 # step 3: prediction
 pred = predict(model, '%s/test.wav' % parent_dir)
-print pred
 print_leaderboard(pred, '%s/data/' % parent_dir)

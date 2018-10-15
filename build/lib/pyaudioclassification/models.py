@@ -34,14 +34,14 @@ def cnn(num_classes):
 
     activation = 'softmax' if num_classes > 2 else 'sigmoid'
     model = Sequential()
-    model.add(Conv1D(32, 3, input_shape=(193, 1)))
+    model.add(Conv1D(64, 3, input_shape=(193, 1)))
     model.add(Activation('relu'))
-    model.add(Conv1D(32, 3))
+    model.add(Conv1D(64, 3))
     model.add(Activation('relu'))
     model.add(MaxPooling1D(3))
-    model.add(Conv1D(64, 3))
+    model.add(Conv1D(128, 3))
     model.add(Activation('relu'))
-    model.add(Conv1D(64, 3))
+    model.add(Conv1D(128, 3))
     model.add(Activation('relu'))
     model.add(GlobalAveragePooling1D())
     model.add(Dropout(0.5))
