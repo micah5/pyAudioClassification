@@ -23,7 +23,7 @@ def load_features(feat_path='feat.npy', label_path="label.npy"):
         np.load(label_path).ravel()
     return features, labels
 
-def train(features, labels, type='cnn', num_classes=None, print_summary=False, test_split=0, save_model=False, lr=0.005, loss_type=None, epochs):
+def train(features, labels, type='cnn', num_classes=None, print_summary=False, test_split=0, save_model=False, lr=0.01, loss_type=None, epochs=50, optimizer='SGD'):
     from sklearn.model_selection import train_test_split
     if num_classes == None: num_classes = np.max(labels, axis=0)
     if test_split > 0:
@@ -35,7 +35,7 @@ def train(features, labels, type='cnn', num_classes=None, print_summary=False, t
 
     if loss_type == None:
         loss_type = 'binary' if num_classes > 0 else 'categorical'
-    model.compile(optimizer=Adam(lr=lr),
+    model.compile(optimizer=SGD(lr=lr),
                   loss='%s_crossentropy' % loss_type,
                   metrics=['accuracy'])
 
