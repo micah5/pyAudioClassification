@@ -1,24 +1,24 @@
 import numpy as np
 from pyaudioclassification import feature_extraction, train, predict, print_leaderboard
 
-parent_dir = './example'
+parent_dir = '.'
 
 # step 1: preprocessing
-if np.DataSource().exists("%s/feat.npy" % parent_dir) and np.DataSource().exists("%s/label.npy" % parent_dir):
-    features, labels = np.load('%s/feat.npy' % parent_dir), np.load('%s/label.npy' % parent_dir)
+if np.DataSource().exists("./feat.npy") and np.DataSource().exists("./label.npy"):
+    features, labels = np.load('./feat.npy'), np.load('./label.npy')
 else:
-    features, labels = feature_extraction('%s/data/' % parent_dir)
-    np.save('%s/feat.npy' % parent_dir, features)
-    np.save('%s/label.npy' % parent_dir, labels)
+    features, labels = feature_extraction('./data/')
+    np.save('./feat.npy', features)
+    np.save('./label.npy', labels)
 
 # step 2: training
-if np.DataSource().exists("%s/model.h5" % parent_dir):
+if np.DataSource().exists("./model.h5"):
     from keras.models import load_model
-    model = load_model('%s/model.h5' % parent_dir)
+    model = load_model('./model.h5')
 else:
-    model = train(features, labels, epochs=500)
-    model.save('%s/model.h5' % parent_dir)
+    model = train(features, labels, epochs=100)
+    model.save('./model.h5')
 
 # step 3: prediction
-pred = predict(model, '%s/test.wav' % parent_dir)
-print_leaderboard(pred, '%s/data/' % parent_dir)
+pred = predict(model, './test.wav')
+print_leaderboard(pred, './data/')

@@ -40,7 +40,7 @@ def parse_audio_files(parent_dir, sub_dirs, file_ext=None, verbose=True):
             # file names
             iter = glob.glob(os.path.join(parent_dir, sub_dir, file_ext))
             if len(iter) > 0:
-                if verbose: print 'Reading', os.path.join(parent_dir, sub_dir, file_ext), '...'
+                if verbose: print('Reading', os.path.join(parent_dir, sub_dir, file_ext), '...')
                 for fn in tqdm(iter):
                     ext_features = get_ext_features(fn)
                     if type(ext_features) is np.ndarray:
