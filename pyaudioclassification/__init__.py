@@ -1,7 +1,8 @@
+from __future__ import absolute_import
 import os
-from feat_extract import parse_audio_files, parse_audio_file
+from pyaudioclassification.feat_extract import parse_audio_files, parse_audio_file
 import numpy as np
-import models
+import pyaudioclassification.models
 from keras.utils import to_categorical
 from keras.optimizers import SGD
 #from models import svm, nn, cnn
@@ -16,7 +17,7 @@ def feature_extraction(data_path):
     return features, labels
 
 def train(features, labels, type='cnn', num_classes=None, print_summary=False,
-    save_model=False, lr=0.01, loss_type=None, epochs=50, optimizer='SGD'):
+    save_model=False, lr=0.01, loss_type=None, epochs=50, optimizer='SGD', verbose=True):
     """Trains model based on provided feature & target data
     Options:
     - epochs: The number of iterations. Default is 50.
@@ -44,7 +45,7 @@ def train(features, labels, type='cnn', num_classes=None, print_summary=False,
 
     x = np.expand_dims(features, axis=2)
 
-    model.fit(x, y, batch_size=64, epochs=epochs)
+    model.fit(x, y, batch_size=64, epochs=epochs, verbose=verbose)
 
     return model
 
@@ -70,5 +71,5 @@ def print_leaderboard(pred, data_path):
     sorted = np.argsort(pred)
     count = 0
     for index in (-pred).argsort()[0]:
-        print '%d.' % (count + 1), r[index + 1], str(round(pred[0][index]*100)) + '%', '(index %s)' % index
+        print('%d.' % (count + 1), r[index + 1], str(round(pred[0][index]*100)) + '%', '(index %s)' % index)
         count += 1

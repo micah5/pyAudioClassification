@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(name='pyaudioclassification',
-      version='0.1.4',
+      version='0.1.9',
       description='Dead simple audio classification',
       classifiers=[
         'Development Status :: 3 - Alpha',

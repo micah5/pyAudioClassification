@@ -20,5 +20,5 @@ else:
     model.save('./model.h5')
 
 # step 3: prediction
-pred = predict(model, './test.wav')
+pred = predict(model, './cow_test.wav')
 print_leaderboard(pred, './data/')
