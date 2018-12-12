@@ -10,7 +10,7 @@ setup(name='pyaudioclassification',
       classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2.7'
+        'Programming Language :: Python :: 3.0'
       ],
       keywords='simple audio classification',
       url='https://github.com/98mprice/pyAudioClassification',
@@ -23,7 +23,8 @@ setup(name='pyaudioclassification',
           'librosa',
           'soundfile',
           'tqdm',
-          'keras'
+          'keras',
+	  'matplotlib'
       ],
       scripts=['bin/feature_extraction'],
       test_suite='nose.collector',
