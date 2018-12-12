@@ -13,12 +13,14 @@ pip install pyaudioclassification
 ```
 
 ### Requirements
+* __Python 3__
 * Keras
 * Tensorflow
 * librosa
 * NumPy
 * Soundfile
 * tqdm
+* matplotlib
 
 ## Quick start
 ```python
