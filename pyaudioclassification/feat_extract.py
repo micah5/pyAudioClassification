@@ -15,7 +15,7 @@ def extract_feature(file_name):
     if X.ndim > 1:
         X = X[:,0]
     X = X.T
-
+    X = np.asfortranarray(X)
     stft = np.abs(librosa.stft(X))
     mfccs = np.mean(librosa.feature.mfcc(y=X, sr=sample_rate, n_mfcc=40).T,axis=0)
     chroma = np.mean(librosa.feature.chroma_stft(S=stft, sr=sample_rate).T,axis=0)
